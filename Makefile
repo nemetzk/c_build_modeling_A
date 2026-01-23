@@ -7,7 +7,7 @@ SCRIPTS := scripts
 CC := gcc
 CFLAGS := -std=c11 -Wall -Wextra -Wpedantic -O2 -g
 CFLAGS += -I$(INC_DIR)
-CFLAGS += -IThirdParty/uthash
+CFLAGS += -IThird_Party/uthash
 LDFLAGS :=
 LDLIBS :=
 
