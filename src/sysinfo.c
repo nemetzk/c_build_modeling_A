@@ -1,6 +1,7 @@
 #include "sysinfo.h"
 #include <stdio.h>
 #include <string.h>
+#include "uthash.h"
 
 static int read_loadavg(double *l1, double *l5, double *l15) {
   FILE *f = fopen("/proc/loadavg", "r");
@@ -9,6 +10,12 @@ static int read_loadavg(double *l1, double *l5, double *l15) {
   fclose(f);
   return (ok == 3) ? 0 : -1;
 }
+
+struct metric {
+    const char *name;
+    long value;
+    UT_hash_handle hh;
+};
 
 static int read_meminfo(long *total_kb, long *avail_kb) {
   FILE *f = fopen("/proc/meminfo", "r");
@@ -38,3 +45,4 @@ int read_sysinfo(sysinfo_t *out) {
   if (read_meminfo(&out->mem_total_kb, &out->mem_available_kb) != 0) return -1;
   return 0;
 }
+
